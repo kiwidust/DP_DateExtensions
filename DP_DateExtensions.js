@@ -1,16 +1,19 @@
-/*  DepressedPress.com DP_DateExtensions
+/*  DepressedPress.com, DP_DateExtensions
 
 Author: Jim Davis, the Depressed Press of Boston
-Date: June 20, 2006
+Created: June 20, 2006
 Contact: webmaster@depressedpress.com
 Website: www.depressedpress.com
 
 Full documentation can be found at:
-http://www.depressedpress.com/Content/Development/JavaScript/Extensions/
+http://depressedpress.com/javascript-extensions/
 
 DP_DateExtensions adds features to the JavaScript "Date" datatype.
 
-Copyright (c) 1996-2013, The Depressed Press of Boston (depressedpress.com)
+
++ + + + + + + + LEGAL NOTICE + + + + + + + +
+
+Copyright (c) 1996-2014, The Depressed Press (depressedpress.com)
 
 All rights reserved.
 
@@ -20,7 +23,7 @@ Redistribution and use in source and binary forms, with or without modification,
 
 +) Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
 
-+) Neither the name of the DEPRESSED PRESS OF BOSTON (DEPRESSEDPRESS.COM) nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
++) Neither the name of the DEPRESSED PRESS (DEPRESSEDPRESS.COM) nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
@@ -411,7 +414,7 @@ Date.parseIso8601 = function(CurDate) {
 
 };
 
-        // getUSDST 
+        // getUSDST
         // Accepts a full (four digit) year and returns an array with two date objects containing the beginning and end of DST in the US.
         // Only functions for years post 1987 and assumes 2007 rules for later years.  Returns "null" for unknown or out of range values.
 Date.getUSDST = function(CurYear) {
@@ -421,28 +424,28 @@ Date.getUSDST = function(CurYear) {
 		return null;
 	};
 
-                // Return an empty array if out-of-range 
-        if ( CurYear < 1987 ) { return null }; 
+                // Return an empty array if out-of-range
+        if ( CurYear < 1987 ) { return null };
 
-                // Determine the last possible (extreme range) dates. 
-        if ( CurYear < 2007 ) { 
-                var exOn = 38; 
-                var exOff = 31; 
-        } else { 
-                var exOn = 14; 
-                var exOff = 38; 
-        }; 
-                // Create the dates (first pass) 
-        var DSTOn = new Date(CurYear, 2, exOn, 2); 
-        var DSTOff = new Date(CurYear, 9, exOff, 2); 
-                // Set date to previous Sunday 
-        DSTOn.setDate(DSTOn.getDate() - DSTOn.getDay()); 
-        DSTOff.setDate(DSTOff.getDate() - DSTOff.getDay()); 
-        
-                // Return the Array 
-        return [DSTOn, DSTOff] 
+                // Determine the last possible (extreme range) dates.
+        if ( CurYear < 2007 ) {
+                var exOn = 38;
+                var exOff = 31;
+        } else {
+                var exOn = 14;
+                var exOff = 38;
+        };
+                // Create the dates (first pass)
+        var DSTOn = new Date(CurYear, 2, exOn, 2);
+        var DSTOff = new Date(CurYear, 9, exOff, 2);
+                // Set date to previous Sunday
+        DSTOn.setDate(DSTOn.getDate() - DSTOn.getDay());
+        DSTOff.setDate(DSTOff.getDate() - DSTOff.getDay());
 
-}; 
+                // Return the Array
+        return [DSTOn, DSTOff]
+
+};
 
 
 
@@ -479,9 +482,9 @@ Date.prototype.isLeapYear = function() {
 
 };
 
-        // isDST 
+        // isDST
         // Returns "true" if the date appears to fall within the local area's Daylight Saving Time (or similar scheme), returns false if the date does not (or it appears that the region doesn't observe DST).
-Date.prototype.isDST = function() { 
+Date.prototype.isDST = function() {
 
 		// Generate test dates
 	var Jan1 = new Date(this.getFullYear(), 0);
@@ -495,7 +498,7 @@ Date.prototype.isDST = function() {
 	if ( Jan1.getTimezoneOffset() < Jul1.getTimezoneOffset() && this.getTimezoneOffset() != Jul1.getTimezoneOffset()){
 		return true;
 	};
-		// We're not in DST	
+		// We're not in DST
 	return false;
 };
 
@@ -900,7 +903,7 @@ Date.prototype.round = function(DatePart, Destructive) {
 		case "milliseconds":
 			break;
 	};
-	
+
 		// Call floor/ceil to finish the job
 	if ( Ef == "F" ) {
 		ReturnDate = this.floor(DatePart);
@@ -1127,7 +1130,7 @@ Date.prototype.add = function(Amount, DatePart, Destructive) {
 
 		// Can't add zero date parts
 	if ( Amount != 0 ) {
-	
+
 			// Do the math
 		switch (DatePart) {
 				// The following are all unambigously convertable to ms equivalents
@@ -1235,7 +1238,7 @@ Date.prototype.diff = function(CompareDate, DatePart, CompareMethod, NormalizeDS
 		//
 		// For simple date parts:
 		// "actual" is the difference between ms divided by the appropriate factors.
-		// "logical" zeros out the non-significant date parts and does a Diff on the result. 
+		// "logical" zeros out the non-significant date parts and does a Diff on the result.
 		// "complete" moves Date1 to the ms before the beginning of the next period, zeros out non-significant date parts, moves Date1 to the beginning of the next period and does a Diff on the result
 	switch (DatePart) {
 
