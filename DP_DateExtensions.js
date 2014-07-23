@@ -1145,10 +1145,10 @@ Date.prototype.add = function(Amount, DatePart, Destructive) {
 				break;
 			case "quarterhours":
 			case "warhols":
-				ReturnDate.setMinutes(ReturnDate.getSeconds() + (Amount*15));
+				ReturnDate.setMinutes(ReturnDate.getMinutes() + (Amount*15));
 				break;
 			case "halfhours":
-				ReturnDate.setMinutes(ReturnDate.getSeconds() + (Amount*30));
+				ReturnDate.setMinutes(ReturnDate.getMinutes() + (Amount*30));
 				break;
 			case "hours":
 				ReturnDate.setHours(ReturnDate.getHours() + Amount);
@@ -1160,7 +1160,16 @@ Date.prototype.add = function(Amount, DatePart, Destructive) {
 				ReturnDate.setDate(ReturnDate.getDate() + (Amount*7));
 				break;
 			case "businessdays":
-				ReturnDate.setDate(ReturnDate.getDate() + Amount);
+				for ( var Cnt = 0; Cnt < Math.abs(Amount); Cnt++ ) {
+					ReturnDate.setDate(ReturnDate.getDate() + ( (Amount < 0) ? -1 : 1) );
+					if ( ReturnDate.getDay() == 0 || ReturnDate.getDay() == 6 ) {
+						if ( Amount < 0 ){
+							ReturnDate.floor(DatePart, true);
+						} else {
+							ReturnDate.ceil(DatePart, true);
+						};
+					};
+				};
 		    		break;
 			case "months":
 				ReturnDate.setMonth(ReturnDate.getMonth() + Amount);
