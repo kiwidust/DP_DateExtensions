@@ -645,16 +645,14 @@ Date.prototype.timeFormat = function(Mask) {
 				switch (MaskPart) {
 					case "h":
 						var CurValue = this.getHours();
-						if ( CurValue >  12 ) {
-							CurValue = CurValue - 12;
-						};
+						if ( CurValue >  12 ) { CurValue = CurValue - 12 };
+						if ( CurValue ==  0 ) { CurValue = 12 };
 						FormattedTime += CurValue;
 						break;
 					case "hh":
 						var CurValue = this.getHours();
-						if ( CurValue >  12 ) {
-							CurValue = CurValue - 12;
-						};
+						if ( CurValue >  12 ) { CurValue = CurValue - 12 };
+						if ( CurValue ==  0 ) { CurValue = 12 };
 						FormattedTime += ("0" + CurValue).slice(-2);
 						break;
 					case "H":
